@@ -1,5 +1,8 @@
 window.addEventListener('load', registerServiceWorker, false);
 
+const publicKeyBase64 = 'BLzPK96e2_tX5pE9HA9D6j_H1fkZi3yEgpG1HGifioFtM1wWSoJBcV7vWAsXzIVngaVAm5lmnD2TwvF46ouYx0M';
+const publicKey = base64UrlToUint8Array(publicKeyBase64);
+
 function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js').then(initialiseState);
@@ -42,8 +45,6 @@ function initialiseState() {
 }
 
 function subscribe() {
-    const publicKey = base64UrlToUint8Array('BLzPK96e2_tX5pE9HA9D6j_H1fkZi3yEgpG1HGifioFtM1wWSoJBcV7vWAsXzIVngaVAm5lmnD2TwvF46ouYx0M');
-
     navigator.serviceWorker.ready.then(function (serviceWorkerRegistration) {
         serviceWorkerRegistration.pushManager.subscribe({
             userVisibleOnly: true,
